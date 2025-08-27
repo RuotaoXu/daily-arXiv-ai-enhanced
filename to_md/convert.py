@@ -40,16 +40,16 @@ if __name__ == "__main__":
         markdown += "\n\n".join(
             [
                 template.format(
-                    title=item["title"],
-                    authors=",".join(item["authors"]),
-                    summary=item["summary"],
-                    url=item['abs'],
-                    tldr=item['AI']['tldr'],
-                    motivation=item['AI']['motivation'],
-                    method=item['AI']['method'],
-                    result=item['AI']['result'],
-                    conclusion=item['AI']['conclusion'],
-                    cate=item['categories'][0],
+                    title=item.get("title", "Untitled"),
+                    authors=",".join(item.get("authors", [])),
+                    summary=item.get("summary", ""),
+                    url=item.get('abs', ''),
+                    tldr=item.get('AI', {}).get('tldr', 'N/A'),
+                    motivation=item.get('AI', {}).get('motivation', 'N/A'),
+                    method=item.get('AI', {}).get('method', 'N/A'),
+                    result=item.get('AI', {}).get('result', 'N/A'),
+                    conclusion=item.get('AI', {}).get('conclusion', 'N/A'),
+                    cate=(item.get('categories') or ['unknown'])[0],
                     idx=next(idx)
                 )
                 for item in data if item["categories"][0] == cate
